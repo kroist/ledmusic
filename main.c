@@ -42,9 +42,12 @@ void reset_output() {
     memset(in_treble_r, 0, sizeof(double) * treble_size);
 }
 
-int low_cut = 100000;
 
-const double coef_bass = 5000000;
+const int low_cut_bass = 1200000;
+const int low_cut_mid = 800000;
+const int low_cut_treble = 100000;
+
+const double coef_bass = 7000000;
 const double coef_mid = 2000000;
 const double coef_treble = 1000000;
 
@@ -282,7 +285,7 @@ int main() {
         double mx1 = 0, mx2 = 0, mx3 = 0;
 
         fprintf(pipe, "set title \"bass\"\n");
-        fprintf(pipe, "set yrange [0:5000000]\n");
+        fprintf(pipe, "set yrange [0:7000000]\n");
         fprintf(pipe, "plot '-' with lines\n");
         int kkek = 0;
         double mx = 0;
@@ -306,7 +309,7 @@ int main() {
                 y = y1;
             else
                 y = y2;
-            if (y < low_cut)
+            if (y < low_cut_bass)
                 y = 0;
             if (y > mx1)
                 mx1 = y;
@@ -342,7 +345,7 @@ int main() {
                 y = y1;
             else
                 y = y2;
-            if (y < low_cut)
+            if (y < low_cut_mid)
                 y = 0;
             if (y > mx2)
                 mx2 = y;
@@ -377,7 +380,7 @@ int main() {
                 y = y1;
             else
                 y = y2;
-            if (y < low_cut)
+            if (y < low_cut_treble)
                 y = 0;
             if (y > mx3)
                 mx3 = y;
